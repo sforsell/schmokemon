@@ -6,6 +6,7 @@ let pokemon;
 export class Pokemon extends Component {
   constructor(){
     super();
+    this.handleClick = this.handleClick.bind(this)
     this.state = {pokemon: pokemon}
   }
 
@@ -15,6 +16,13 @@ export class Pokemon extends Component {
       this.setState({pokemon: response.data});
     })
   }
+
+  handleClick(event){
+    event.preventDefault();
+    const id = event.target.id
+    axios.post('http://localhost:8080/users/1/pokemons', {id: id})
+  }
+
 
   render(){
 
@@ -41,8 +49,8 @@ export class Pokemon extends Component {
             <div className="card">
               <div className="card-image center-align">
                 <img className="half-size" src={sprites ? sprites.front_default : 'http://www.pngall.com/wp-content/uploads/2016/06/Pokemon-PNG-Pic.png'} alt=""/>
-                <a className="btn-floating pokeball halfway-fab waves-effect waves-light white " id={id} >
-                  <img className="pokeball" src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png' alt='' />
+                <a onClick={this.handleClick} className="btn-floating pokeball halfway-fab waves-effect waves-light white "  >
+                  <img className="pokeball" src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png' id={id} alt='' />
                 </a>
                 <span className="card-title ">{name}</span>
               </div>

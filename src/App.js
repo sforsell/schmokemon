@@ -4,6 +4,7 @@ import axios from 'axios';
 import {Header} from './Header'
 import {SideBar} from './Sidebar'
 import {Collection} from './Collection';
+import {Profile} from './Profile';
 import {Pokemon} from './Pokemon';
 import {Filtered} from './Filtered';
 
@@ -13,6 +14,7 @@ class App extends Component {
     super()
     this.selectPokemon = this.selectPokemon.bind(this);
     this.selectHome = this.selectHome.bind(this);
+    this.selectProfile = this.selectProfile.bind(this);
     this.selectType = this.selectType.bind(this);
     this.state = {view: <Collection  endPoint='http://pokeapi.co/api/v2/pokemon/?limit=30' onSelectPokemon={this.selectPokemon} />}
   }
@@ -23,6 +25,12 @@ class App extends Component {
 
   selectHome() {
     this.setState({view: <Collection endPoint='http://pokeapi.co/api/v2/pokemon/?limit=30' onSelectPokemon={this.selectPokemon} />});
+  }
+
+  selectProfile(){
+    console.log("bubbled")
+    this.setState({view: <Profile />});
+    console.log()
   }
 
   selectPokemon(url){
@@ -36,7 +44,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header onSelectHome={ this.selectHome } />
+        <Header onSelectProfile={this.selectProfile} onSelectHome={ this.selectHome } />
         <SideBar onSelectType={ this.selectType } />
         <div id="main">
           {this.state.view}

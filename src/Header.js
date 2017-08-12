@@ -1,25 +1,33 @@
 import React, { Component } from 'react';
-import {Navbar, NavItem} from 'react-materialize'
-
 
 export class Header extends Component {
   constructor(){
     super()
-    this.handleClick = this.handleClick.bind(this)
+    this.handleHomeClick = this.handleHomeClick.bind(this)
+    this.handleProfileClick = this.handleProfileClick.bind(this)
+
   }
 
-
-  handleClick(event) {
+  handleHomeClick(event) {
     event.preventDefault();
     this.props.onSelectHome();
   }
 
+  handleProfileClick(event){
+    event.preventDefault();
+    this.props.onSelectProfile();
+  }
 
   render(){
     return (
-        <Navbar onClick={this.handleClick} className="red darken-4 header" brand='Schmokémon' right>
-          <NavItem  href='#'>profile</NavItem>
-        </Navbar>
-      )
+      <nav>
+        <div className="nav-wrapper red darken-4">
+          <a href="" className="brand-logo" onClick={this.handleHomeClick}> Schmokémon </a>
+          <ul id="nav-mobile" className="right hide-on-med-and-down">
+            <li><a href="" onClick={this.handleProfileClick}>profile </a></li>
+          </ul>
+        </div>
+      </nav>
+    )
   }
 }
